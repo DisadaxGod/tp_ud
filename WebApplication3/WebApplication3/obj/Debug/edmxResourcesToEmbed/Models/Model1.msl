@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище DataBaseEmployeesModelContainer" CdmEntityContainer="DataBaseEmployeesEntities">
+    <EntitySetMapping Name="Children">
+      <EntityTypeMapping TypeName="DataBaseEmployeesModel.Children">
+        <MappingFragment StoreEntitySet="Children">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="DataBaseEmployeesModel.Children">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="Хранилище DataBaseEmployeesModel.ChildrenInsert">
+            <ScalarProperty Name="DateOfBirth" ParameterName="Birth" />
+            <ScalarProperty Name="Sex" ParameterName="Sex" />
+            <ScalarProperty Name="Name" ParameterName="Name" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="Хранилище DataBaseEmployeesModel.UpdateChildren">
+            <ScalarProperty Name="DateOfBirth" ParameterName="Birth" Version="Current" />
+            <ScalarProperty Name="Sex" ParameterName="Sex" Version="Current" />
+            <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="Хранилище DataBaseEmployeesModel.ChildrenDelete">
+            <ScalarProperty Name="DateOfBirth" ParameterName="Birth" />
+            <ScalarProperty Name="Sex" ParameterName="Sex" />
+            <ScalarProperty Name="Name" ParameterName="Name" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Department">
+      <EntityTypeMapping TypeName="DataBaseEmployeesModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NumberOfAssignedRooms" ColumnName="NumberOfAssignedRooms" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="DataBaseEmployeesModel.Department">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="Хранилище DataBaseEmployeesModel.DepartmentInsert">
+            <ScalarProperty Name="NumberOfAssignedRooms" ParameterName="Count" />
+            <ScalarProperty Name="Name" ParameterName="Name" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="Хранилище DataBaseEmployeesModel.UpdateDepartment">
+            <ScalarProperty Name="NumberOfAssignedRooms" ParameterName="Count" Version="Current" />
+            <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="Хранилище DataBaseEmployeesModel.DepartmentDelete">
+            <ScalarProperty Name="NumberOfAssignedRooms" ParameterName="Count" />
+            <ScalarProperty Name="Name" ParameterName="Name" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee">
+      <EntityTypeMapping TypeName="DataBaseEmployeesModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="PersonnelNumber" ColumnName="PersonnelNumber" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="PassportData" ColumnName="PassportData" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="AmountOfChildren" ColumnName="AmountOfChildren" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="DataBaseEmployeesModel.Employee">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="Хранилище DataBaseEmployeesModel.EmployeeInsert">
+            <ScalarProperty Name="AmountOfChildren" ParameterName="Children" />
+            <ScalarProperty Name="DateOfBirth" ParameterName="Birth" />
+            <ScalarProperty Name="PassportData" ParameterName="Pass" />
+            <ScalarProperty Name="Position" ParameterName="Position" />
+            <ScalarProperty Name="Sex" ParameterName="Sex" />
+            <ScalarProperty Name="Address" ParameterName="Address" />
+            <ScalarProperty Name="FullName" ParameterName="FullName" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="Хранилище DataBaseEmployeesModel.UpdateEmployee">
+            <ScalarProperty Name="AmountOfChildren" ParameterName="Children" Version="Current" />
+            <ScalarProperty Name="DateOfBirth" ParameterName="Birth" Version="Current" />
+            <ScalarProperty Name="PassportData" ParameterName="Pass" Version="Current" />
+            <ScalarProperty Name="PersonnelNumber" ParameterName="id" Version="Current" />
+            <ScalarProperty Name="Position" ParameterName="Position" Version="Current" />
+            <ScalarProperty Name="Sex" ParameterName="Sex" Version="Current" />
+            <ScalarProperty Name="Address" ParameterName="Address" Version="Current" />
+            <ScalarProperty Name="FullName" ParameterName="FullName" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="Хранилище DataBaseEmployeesModel.EmployeeDelete">
+            <ScalarProperty Name="PersonnelNumber" ParameterName="Id" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Schedule">
+      <EntityTypeMapping TypeName="DataBaseEmployeesModel.Schedule">
+        <MappingFragment StoreEntitySet="Schedule">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Employee_PersonnelNumber" ColumnName="Employee_PersonnelNumber" />
+          <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="DataBaseEmployeesModel.Schedule">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="Хранилище DataBaseEmployeesModel.ScheduleInsert">
+            <ScalarProperty Name="Employee_PersonnelNumber" ParameterName="Id" />
+            <ScalarProperty Name="Employee_PersonnelNumber" ParameterName="Id" />
+            <ScalarProperty Name="CompletionDate" ParameterName="End" />
+            <ScalarProperty Name="StartDate" ParameterName="Start" />
+            <ScalarProperty Name="Department_Name" ParameterName="Name" />
+            <ScalarProperty Name="Employee_PersonnelNumber" ParameterName="Id" />
+            <ScalarProperty Name="Employee_PersonnelNumber" ParameterName="Id" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="Хранилище DataBaseEmployeesModel.UpdateSchedule">
+            <ScalarProperty Name="Department_Name" ParameterName="Name" Version="Current" />
+            <ScalarProperty Name="Department_Name" ParameterName="Name" Version="Current" />
+            <ScalarProperty Name="Department_Name" ParameterName="Name" Version="Current" />
+            <ScalarProperty Name="Department_Name" ParameterName="Name" Version="Current" />
+            <AssociationEnd AssociationSet="FK__Schedule__Employ__1AD3FDA4" From="Schedule" To="Employee">
+              <ScalarProperty Name="PersonnelNumber" ParameterName="Id" Version="Current" />
+              <ScalarProperty Name="PersonnelNumber" ParameterName="Id" Version="Current" />
+            </AssociationEnd>
+            <AssociationEnd AssociationSet="FK__Schedule__Depart__19DFD96B" From="Schedule" To="Department">
+              <ScalarProperty Name="Name" ParameterName="Id" Version="Current" />
+            </AssociationEnd>
+            <ScalarProperty Name="CompletionDate" ParameterName="End" Version="Current" />
+            <ScalarProperty Name="StartDate" ParameterName="Start" Version="Current" />
+            <ScalarProperty Name="Employee_PersonnelNumber" ParameterName="Id" Version="Current" />
+            <ScalarProperty Name="Id" ParameterName="Id_Sc" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="Хранилище DataBaseEmployeesModel.ScheduleDelete">
+            <ScalarProperty Name="Id" ParameterName="Id_sc" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="BirthCertificate" TypeName="DataBaseEmployeesModel.BirthCertificate" StoreEntitySet="BirthCertificate">
+      <EndProperty Name="Children">
+        <ScalarProperty Name="Name" ColumnName="Children_Name" />
+      </EndProperty>
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="PersonnelNumber" ColumnName="Employee_PersonnelNumber" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="BirthCertificateDelete" FunctionName="Хранилище DataBaseEmployeesModel.BirthCertificateDelete" />
+    <FunctionImportMapping FunctionImportName="BirthCertificateInsert" FunctionName="Хранилище DataBaseEmployeesModel.BirthCertificateInsert" />
+    <FunctionImportMapping FunctionImportName="BirthCertificateOutputAll" FunctionName="Хранилище DataBaseEmployeesModel.BirthCertificateOutputAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DataBaseEmployeesModel.BirthCertificateOutputAll_Result">
+          <ScalarProperty Name="Employee_PersonnelNumber" ColumnName="Employee_PersonnelNumber" />
+          <ScalarProperty Name="Children_Name" ColumnName="Children_Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ChildrenDelete" FunctionName="Хранилище DataBaseEmployeesModel.ChildrenDelete" />
+    <FunctionImportMapping FunctionImportName="ChildrenInsert" FunctionName="Хранилище DataBaseEmployeesModel.ChildrenInsert" />
+    <FunctionImportMapping FunctionImportName="ChildrenOutputAll" FunctionName="Хранилище DataBaseEmployeesModel.ChildrenOutputAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DataBaseEmployeesModel.ChildrenOutputAll_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="DepartmentDelete" FunctionName="Хранилище DataBaseEmployeesModel.DepartmentDelete" />
+    <FunctionImportMapping FunctionImportName="DepartmentInsert" FunctionName="Хранилище DataBaseEmployeesModel.DepartmentInsert" />
+    <FunctionImportMapping FunctionImportName="DepartmentOutputAll" FunctionName="Хранилище DataBaseEmployeesModel.DepartmentOutputAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DataBaseEmployeesModel.DepartmentOutputAll_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NumberOfAssignedRooms" ColumnName="NumberOfAssignedRooms" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EmployeeDelete" FunctionName="Хранилище DataBaseEmployeesModel.EmployeeDelete" />
+    <FunctionImportMapping FunctionImportName="EmployeeInsert" FunctionName="Хранилище DataBaseEmployeesModel.EmployeeInsert" />
+    <FunctionImportMapping FunctionImportName="EmployeeOutputAll" FunctionName="Хранилище DataBaseEmployeesModel.EmployeeOutputAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DataBaseEmployeesModel.EmployeeOutputAll_Result">
+          <ScalarProperty Name="PersonnelNumber" ColumnName="PersonnelNumber" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="PassportData" ColumnName="PassportData" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="AmountOfChildren" ColumnName="AmountOfChildren" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GenerateBirthCer" FunctionName="Хранилище DataBaseEmployeesModel.GenerateBirthCer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DataBaseEmployeesModel.GenerateBirthCer_Result">
+          <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+          <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+          <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+          <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+          <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GenerateChild" FunctionName="Хранилище DataBaseEmployeesModel.GenerateChild">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DataBaseEmployeesModel.GenerateChild_Result">
+          <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+          <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+          <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+          <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+          <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GenerateDep" FunctionName="Хранилище DataBaseEmployeesModel.GenerateDep">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DataBaseEmployeesModel.GenerateDep_Result">
+          <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+          <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+          <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+          <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+          <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GenerateEmp1" FunctionName="Хранилище DataBaseEmployeesModel.GenerateEmp1">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DataBaseEmployeesModel.GenerateEmp1_Result">
+          <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+          <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+          <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+          <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+          <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GenerateSched" FunctionName="Хранилище DataBaseEmployeesModel.GenerateSched" />
+    <FunctionImportMapping FunctionImportName="OutputEmployee" FunctionName="Хранилище DataBaseEmployeesModel.OutputEmployee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DataBaseEmployeesModel.OutputEmployee_Result">
+          <ScalarProperty Name="PersonnelNumber" ColumnName="PersonnelNumber" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="PassportData" ColumnName="PassportData" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="AmountOfChildren" ColumnName="AmountOfChildren" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="OutputEmployeeWithCh" FunctionName="Хранилище DataBaseEmployeesModel.OutputEmployeeWithCh">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DataBaseEmployeesModel.OutputEmployeeWithCh_Result">
+          <ScalarProperty Name="PersonnelNumber" ColumnName="PersonnelNumber" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="PassportData" ColumnName="PassportData" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="AmountOfChildren" ColumnName="AmountOfChildren" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Aver" ColumnName="Aver" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ScheduleDelete" FunctionName="Хранилище DataBaseEmployeesModel.ScheduleDelete" />
+    <FunctionImportMapping FunctionImportName="ScheduleInsert" FunctionName="Хранилище DataBaseEmployeesModel.ScheduleInsert" />
+    <FunctionImportMapping FunctionImportName="ScheduleOutputAll" FunctionName="Хранилище DataBaseEmployeesModel.ScheduleOutputAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DataBaseEmployeesModel.ScheduleOutputAll_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Employee_PersonnelNumber" ColumnName="Employee_PersonnelNumber" />
+          <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateChildren" FunctionName="Хранилище DataBaseEmployeesModel.UpdateChildren" />
+    <FunctionImportMapping FunctionImportName="UpdateDepartment" FunctionName="Хранилище DataBaseEmployeesModel.UpdateDepartment" />
+    <FunctionImportMapping FunctionImportName="UpdateEmployee" FunctionName="Хранилище DataBaseEmployeesModel.UpdateEmployee" />
+    <FunctionImportMapping FunctionImportName="UpdateSchedule" FunctionName="Хранилище DataBaseEmployeesModel.UpdateSchedule" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,816 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище DataBaseEmployeesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BirthCertificate">
+          <Key>
+            <PropertyRef Name="Employee_PersonnelNumber" />
+            <PropertyRef Name="Children_Name" />
+          </Key>
+          <Property Name="Employee_PersonnelNumber" Type="int" Nullable="false" />
+          <Property Name="Children_Name" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Children">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Sex" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="NumberOfAssignedRooms" Type="int" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="PersonnelNumber" />
+          </Key>
+          <Property Name="PersonnelNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="PassportData" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Sex" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Position" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="AmountOfChildren" Type="varchar" MaxLength="8" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_PersonnelNumber" Type="int" Nullable="false" />
+          <Property Name="Department_Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="CompletionDate" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__BirthCert__Child__68487DD7">
+          <End Role="Children" Type="Self.Children" Multiplicity="1" />
+          <End Role="BirthCertificate" Type="Self.BirthCertificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Children">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="BirthCertificate">
+              <PropertyRef Name="Children_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BirthCert__Emplo__6754599E">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="BirthCertificate" Type="Self.BirthCertificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="PersonnelNumber" />
+            </Principal>
+            <Dependent Role="BirthCertificate">
+              <PropertyRef Name="Employee_PersonnelNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__Depart__19DFD96B">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Department_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__Employ__1AD3FDA4">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="PersonnelNumber" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Employee_PersonnelNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="BirthCertificateDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="BirthCertificateInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="BirthCertificateOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ChildrenDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Sex" Type="varchar" Mode="In" />
+          <Parameter Name="Birth" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ChildrenInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Sex" Type="varchar" Mode="In" />
+          <Parameter Name="Birth" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ChildrenOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DepartmentDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Count" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DepartmentInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Count" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DepartmentOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="EmployeeDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EmployeeInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FullName" Type="varchar" Mode="In" />
+          <Parameter Name="Pass" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+          <Parameter Name="Birth" Type="date" Mode="In" />
+          <Parameter Name="Sex" Type="varchar" Mode="In" />
+          <Parameter Name="Position" Type="varchar" Mode="In" />
+          <Parameter Name="Children" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="EmployeeOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GenerateBirthCer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RowsToInsert" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GenerateChild" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RowsToInsert" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GenerateDep" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RowsToInsert" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GenerateEmp1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RowsToInsert" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GenerateSched" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RowsToInsert" Type="int" Mode="In" />
+        </Function>
+        <Function Name="OutputEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Date" Type="date" Mode="In" />
+        </Function>
+        <Function Name="OutputEmployeeWithCh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ScheduleDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_sc" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ScheduleInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Start" Type="date" Mode="In" />
+          <Parameter Name="End" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ScheduleOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UpdateChildren" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Sex" Type="varchar" Mode="In" />
+          <Parameter Name="Birth" Type="date" Mode="In" />
+        </Function>
+        <Function Name="UpdateDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Count" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="FullName" Type="varchar" Mode="In" />
+          <Parameter Name="Pass" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+          <Parameter Name="Birth" Type="date" Mode="In" />
+          <Parameter Name="Sex" Type="varchar" Mode="In" />
+          <Parameter Name="Position" Type="varchar" Mode="In" />
+          <Parameter Name="Children" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Sc" Type="int" Mode="In" />
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Start" Type="date" Mode="In" />
+          <Parameter Name="End" Type="date" Mode="In" />
+        </Function>
+        <EntityContainer Name="Хранилище DataBaseEmployeesModelContainer">
+          <EntitySet Name="BirthCertificate" EntityType="Self.BirthCertificate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Children" EntityType="Self.Children" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BirthCert__Child__68487DD7" Association="Self.FK__BirthCert__Child__68487DD7">
+            <End Role="Children" EntitySet="Children" />
+            <End Role="BirthCertificate" EntitySet="BirthCertificate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BirthCert__Emplo__6754599E" Association="Self.FK__BirthCert__Emplo__6754599E">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="BirthCertificate" EntitySet="BirthCertificate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__Depart__19DFD96B" Association="Self.FK__Schedule__Depart__19DFD96B">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__Employ__1AD3FDA4" Association="Self.FK__Schedule__Employ__1AD3FDA4">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataBaseEmployeesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Children">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Employee" Relationship="Self.BirthCertificate" FromRole="Children" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumberOfAssignedRooms" Type="Int32" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FK__Schedule__Depart__19DFD96B" FromRole="Department" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="PersonnelNumber" />
+          </Key>
+          <Property Name="PersonnelNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PassportData" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Sex" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AmountOfChildren" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FK__Schedule__Employ__1AD3FDA4" FromRole="Employee" ToRole="Schedule" />
+          <NavigationProperty Name="Children" Relationship="Self.BirthCertificate" FromRole="Employee" ToRole="Children" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_PersonnelNumber" Type="Int32" Nullable="false" />
+          <Property Name="Department_Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CompletionDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Schedule__Depart__19DFD96B" FromRole="Schedule" ToRole="Department" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Schedule__Employ__1AD3FDA4" FromRole="Schedule" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK__Schedule__Depart__19DFD96B">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Department_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__Employ__1AD3FDA4">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="PersonnelNumber" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Employee_PersonnelNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BirthCertificate">
+          <End Role="Children" Type="Self.Children" Multiplicity="*" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="DataBaseEmployeesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Children" EntityType="Self.Children" />
+          <EntitySet Name="Department" EntityType="Self.Department" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" />
+          <AssociationSet Name="FK__Schedule__Depart__19DFD96B" Association="Self.FK__Schedule__Depart__19DFD96B">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__Employ__1AD3FDA4" Association="Self.FK__Schedule__Employ__1AD3FDA4">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="BirthCertificate" Association="Self.BirthCertificate">
+            <End Role="Children" EntitySet="Children" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <FunctionImport Name="BirthCertificateDelete">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BirthCertificateInsert">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BirthCertificateOutputAll" ReturnType="Collection(DataBaseEmployeesModel.BirthCertificateOutputAll_Result)" />
+          <FunctionImport Name="ChildrenDelete">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Sex" Mode="In" Type="String" />
+            <Parameter Name="Birth" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ChildrenInsert">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Sex" Mode="In" Type="String" />
+            <Parameter Name="Birth" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ChildrenOutputAll" ReturnType="Collection(DataBaseEmployeesModel.ChildrenOutputAll_Result)" />
+          <FunctionImport Name="DepartmentDelete">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Count" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DepartmentInsert">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Count" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DepartmentOutputAll" ReturnType="Collection(DataBaseEmployeesModel.DepartmentOutputAll_Result)" />
+          <FunctionImport Name="EmployeeDelete">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EmployeeInsert">
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="Pass" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Birth" Mode="In" Type="DateTime" />
+            <Parameter Name="Sex" Mode="In" Type="String" />
+            <Parameter Name="Position" Mode="In" Type="String" />
+            <Parameter Name="Children" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EmployeeOutputAll" ReturnType="Collection(DataBaseEmployeesModel.EmployeeOutputAll_Result)" />
+          <FunctionImport Name="GenerateBirthCer" ReturnType="Collection(DataBaseEmployeesModel.GenerateBirthCer_Result)">
+            <Parameter Name="RowsToInsert" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateChild" ReturnType="Collection(DataBaseEmployeesModel.GenerateChild_Result)">
+            <Parameter Name="RowsToInsert" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateDep" ReturnType="Collection(DataBaseEmployeesModel.GenerateDep_Result)">
+            <Parameter Name="RowsToInsert" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateEmp1" ReturnType="Collection(DataBaseEmployeesModel.GenerateEmp1_Result)">
+            <Parameter Name="RowsToInsert" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateSched">
+            <Parameter Name="RowsToInsert" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="OutputEmployee" ReturnType="Collection(DataBaseEmployeesModel.OutputEmployee_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="OutputEmployeeWithCh" ReturnType="Collection(DataBaseEmployeesModel.OutputEmployeeWithCh_Result)" />
+          <FunctionImport Name="ScheduleDelete">
+            <Parameter Name="Id_sc" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ScheduleInsert">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Start" Mode="In" Type="DateTime" />
+            <Parameter Name="End" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ScheduleOutputAll" ReturnType="Collection(DataBaseEmployeesModel.ScheduleOutputAll_Result)" />
+          <FunctionImport Name="UpdateChildren">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Sex" Mode="In" Type="String" />
+            <Parameter Name="Birth" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateDepartment">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Count" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateEmployee">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="Pass" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Birth" Mode="In" Type="DateTime" />
+            <Parameter Name="Sex" Mode="In" Type="String" />
+            <Parameter Name="Position" Mode="In" Type="String" />
+            <Parameter Name="Children" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateSchedule">
+            <Parameter Name="Id_Sc" Mode="In" Type="Int32" />
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Start" Mode="In" Type="DateTime" />
+            <Parameter Name="End" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="BirthCertificateOutputAll_Result">
+          <Property Type="Int32" Name="Employee_PersonnelNumber" Nullable="false" />
+          <Property Type="String" Name="Children_Name" Nullable="false" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="ChildrenOutputAll_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Sex" Nullable="false" MaxLength="1" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DepartmentOutputAll_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="25" />
+          <Property Type="Int32" Name="NumberOfAssignedRooms" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="EmployeeOutputAll_Result">
+          <Property Type="Int32" Name="PersonnelNumber" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="PassportData" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+          <Property Type="String" Name="Sex" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Position" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="AmountOfChildren" Nullable="true" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="GenerateBirthCer_Result">
+          <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
+          <Property Type="Int32" Name="ErrorSeverity" Nullable="true" />
+          <Property Type="Int32" Name="ErrorState" Nullable="true" />
+          <Property Type="String" Name="ErrorProcedure" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="ErrorLine" Nullable="true" />
+          <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="GenerateChild_Result">
+          <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
+          <Property Type="Int32" Name="ErrorSeverity" Nullable="true" />
+          <Property Type="Int32" Name="ErrorState" Nullable="true" />
+          <Property Type="String" Name="ErrorProcedure" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="ErrorLine" Nullable="true" />
+          <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="GenerateDep_Result">
+          <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
+          <Property Type="Int32" Name="ErrorSeverity" Nullable="true" />
+          <Property Type="Int32" Name="ErrorState" Nullable="true" />
+          <Property Type="String" Name="ErrorProcedure" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="ErrorLine" Nullable="true" />
+          <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="GenerateEmp1_Result">
+          <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
+          <Property Type="Int32" Name="ErrorSeverity" Nullable="true" />
+          <Property Type="Int32" Name="ErrorState" Nullable="true" />
+          <Property Type="String" Name="ErrorProcedure" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="ErrorLine" Nullable="true" />
+          <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="OutputEmployee_Result">
+          <Property Type="Int32" Name="PersonnelNumber" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="PassportData" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+          <Property Type="String" Name="Sex" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Position" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="AmountOfChildren" Nullable="true" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="OutputEmployeeWithCh_Result">
+          <Property Type="Int32" Name="PersonnelNumber" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="PassportData" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+          <Property Type="String" Name="Sex" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Position" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="AmountOfChildren" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="25" />
+          <Property Type="Int32" Name="Aver" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ScheduleOutputAll_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Employee_PersonnelNumber" Nullable="false" />
+          <Property Type="String" Name="Department_Name" Nullable="false" MaxLength="25" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" />
+          <Property Type="DateTime" Name="CompletionDate" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DataBaseEmployeesModelContainer" CdmEntityContainer="DataBaseEmployeesEntities">
+          <EntitySetMapping Name="Children">
+            <EntityTypeMapping TypeName="DataBaseEmployeesModel.Children">
+              <MappingFragment StoreEntitySet="Children">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="DataBaseEmployeesModel.Children">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="Хранилище DataBaseEmployeesModel.ChildrenInsert">
+                  <ScalarProperty Name="DateOfBirth" ParameterName="Birth" />
+                  <ScalarProperty Name="Sex" ParameterName="Sex" />
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="Хранилище DataBaseEmployeesModel.UpdateChildren">
+                  <ScalarProperty Name="DateOfBirth" ParameterName="Birth" Version="Current" />
+                  <ScalarProperty Name="Sex" ParameterName="Sex" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="Хранилище DataBaseEmployeesModel.ChildrenDelete">
+                  <ScalarProperty Name="DateOfBirth" ParameterName="Birth" />
+                  <ScalarProperty Name="Sex" ParameterName="Sex" />
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="DataBaseEmployeesModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NumberOfAssignedRooms" ColumnName="NumberOfAssignedRooms" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="DataBaseEmployeesModel.Department">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="Хранилище DataBaseEmployeesModel.DepartmentInsert">
+                  <ScalarProperty Name="NumberOfAssignedRooms" ParameterName="Count" />
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="Хранилище DataBaseEmployeesModel.UpdateDepartment">
+                  <ScalarProperty Name="NumberOfAssignedRooms" ParameterName="Count" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="Хранилище DataBaseEmployeesModel.DepartmentDelete">
+                  <ScalarProperty Name="NumberOfAssignedRooms" ParameterName="Count" />
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="DataBaseEmployeesModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="PersonnelNumber" ColumnName="PersonnelNumber" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="PassportData" ColumnName="PassportData" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="AmountOfChildren" ColumnName="AmountOfChildren" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="DataBaseEmployeesModel.Employee">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="Хранилище DataBaseEmployeesModel.EmployeeInsert">
+                  <ScalarProperty Name="AmountOfChildren" ParameterName="Children" />
+                  <ScalarProperty Name="DateOfBirth" ParameterName="Birth" />
+                  <ScalarProperty Name="PassportData" ParameterName="Pass" />
+                  <ScalarProperty Name="Position" ParameterName="Position" />
+                  <ScalarProperty Name="Sex" ParameterName="Sex" />
+                  <ScalarProperty Name="Address" ParameterName="Address" />
+                  <ScalarProperty Name="FullName" ParameterName="FullName" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="Хранилище DataBaseEmployeesModel.UpdateEmployee">
+                  <ScalarProperty Name="AmountOfChildren" ParameterName="Children" Version="Current" />
+                  <ScalarProperty Name="DateOfBirth" ParameterName="Birth" Version="Current" />
+                  <ScalarProperty Name="PassportData" ParameterName="Pass" Version="Current" />
+                  <ScalarProperty Name="PersonnelNumber" ParameterName="id" Version="Current" />
+                  <ScalarProperty Name="Position" ParameterName="Position" Version="Current" />
+                  <ScalarProperty Name="Sex" ParameterName="Sex" Version="Current" />
+                  <ScalarProperty Name="Address" ParameterName="Address" Version="Current" />
+                  <ScalarProperty Name="FullName" ParameterName="FullName" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="Хранилище DataBaseEmployeesModel.EmployeeDelete" >
+                  <ScalarProperty Name="PersonnelNumber" ParameterName="Id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedule">
+            <EntityTypeMapping TypeName="DataBaseEmployeesModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Employee_PersonnelNumber" ColumnName="Employee_PersonnelNumber" />
+                <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="DataBaseEmployeesModel.Schedule">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="Хранилище DataBaseEmployeesModel.ScheduleInsert">
+                  <ScalarProperty Name="Employee_PersonnelNumber" ParameterName="Id" />
+                  <ScalarProperty Name="Employee_PersonnelNumber" ParameterName="Id" />
+                  <ScalarProperty Name="CompletionDate" ParameterName="End" />
+                  <ScalarProperty Name="StartDate" ParameterName="Start" />
+                  <ScalarProperty Name="Department_Name" ParameterName="Name" />
+                  <ScalarProperty Name="Employee_PersonnelNumber" ParameterName="Id" />
+                  <ScalarProperty Name="Employee_PersonnelNumber" ParameterName="Id" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="Хранилище DataBaseEmployeesModel.UpdateSchedule">
+                  <ScalarProperty Name="Department_Name" ParameterName="Name" Version="Current" />
+                  <ScalarProperty Name="Department_Name" ParameterName="Name" Version="Current" />
+                  <ScalarProperty Name="Department_Name" ParameterName="Name" Version="Current" />
+                  <ScalarProperty Name="Department_Name" ParameterName="Name" Version="Current" />
+                  <AssociationEnd AssociationSet="FK__Schedule__Employ__1AD3FDA4" From="Schedule" To="Employee">
+                    <ScalarProperty Name="PersonnelNumber" ParameterName="Id" Version="Current" />
+                    <ScalarProperty Name="PersonnelNumber" ParameterName="Id" Version="Current" />
+                  </AssociationEnd>
+                  <AssociationEnd AssociationSet="FK__Schedule__Depart__19DFD96B" From="Schedule" To="Department">
+                    <ScalarProperty Name="Name" ParameterName="Id" Version="Current" />
+                  </AssociationEnd>
+                  <ScalarProperty Name="CompletionDate" ParameterName="End" Version="Current" />
+                  <ScalarProperty Name="StartDate" ParameterName="Start" Version="Current" />
+                  <ScalarProperty Name="Employee_PersonnelNumber" ParameterName="Id" Version="Current" />
+                  <ScalarProperty Name="Id" ParameterName="Id_Sc" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="Хранилище DataBaseEmployeesModel.ScheduleDelete" >
+                  <ScalarProperty Name="Id" ParameterName="Id_sc" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="BirthCertificate" TypeName="DataBaseEmployeesModel.BirthCertificate" StoreEntitySet="BirthCertificate">
+            <EndProperty Name="Children">
+              <ScalarProperty Name="Name" ColumnName="Children_Name" />
+            </EndProperty>
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="PersonnelNumber" ColumnName="Employee_PersonnelNumber" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="BirthCertificateDelete" FunctionName="Хранилище DataBaseEmployeesModel.BirthCertificateDelete" />
+          <FunctionImportMapping FunctionImportName="BirthCertificateInsert" FunctionName="Хранилище DataBaseEmployeesModel.BirthCertificateInsert" />
+          <FunctionImportMapping FunctionImportName="BirthCertificateOutputAll" FunctionName="Хранилище DataBaseEmployeesModel.BirthCertificateOutputAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataBaseEmployeesModel.BirthCertificateOutputAll_Result">
+                <ScalarProperty Name="Employee_PersonnelNumber" ColumnName="Employee_PersonnelNumber" />
+                <ScalarProperty Name="Children_Name" ColumnName="Children_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ChildrenDelete" FunctionName="Хранилище DataBaseEmployeesModel.ChildrenDelete" />
+          <FunctionImportMapping FunctionImportName="ChildrenInsert" FunctionName="Хранилище DataBaseEmployeesModel.ChildrenInsert" />
+          <FunctionImportMapping FunctionImportName="ChildrenOutputAll" FunctionName="Хранилище DataBaseEmployeesModel.ChildrenOutputAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataBaseEmployeesModel.ChildrenOutputAll_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DepartmentDelete" FunctionName="Хранилище DataBaseEmployeesModel.DepartmentDelete" />
+          <FunctionImportMapping FunctionImportName="DepartmentInsert" FunctionName="Хранилище DataBaseEmployeesModel.DepartmentInsert" />
+          <FunctionImportMapping FunctionImportName="DepartmentOutputAll" FunctionName="Хранилище DataBaseEmployeesModel.DepartmentOutputAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataBaseEmployeesModel.DepartmentOutputAll_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NumberOfAssignedRooms" ColumnName="NumberOfAssignedRooms" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EmployeeDelete" FunctionName="Хранилище DataBaseEmployeesModel.EmployeeDelete" />
+          <FunctionImportMapping FunctionImportName="EmployeeInsert" FunctionName="Хранилище DataBaseEmployeesModel.EmployeeInsert" />
+          <FunctionImportMapping FunctionImportName="EmployeeOutputAll" FunctionName="Хранилище DataBaseEmployeesModel.EmployeeOutputAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataBaseEmployeesModel.EmployeeOutputAll_Result">
+                <ScalarProperty Name="PersonnelNumber" ColumnName="PersonnelNumber" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="PassportData" ColumnName="PassportData" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="AmountOfChildren" ColumnName="AmountOfChildren" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GenerateBirthCer" FunctionName="Хранилище DataBaseEmployeesModel.GenerateBirthCer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataBaseEmployeesModel.GenerateBirthCer_Result">
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GenerateChild" FunctionName="Хранилище DataBaseEmployeesModel.GenerateChild">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataBaseEmployeesModel.GenerateChild_Result">
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GenerateDep" FunctionName="Хранилище DataBaseEmployeesModel.GenerateDep">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataBaseEmployeesModel.GenerateDep_Result">
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GenerateEmp1" FunctionName="Хранилище DataBaseEmployeesModel.GenerateEmp1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataBaseEmployeesModel.GenerateEmp1_Result">
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GenerateSched" FunctionName="Хранилище DataBaseEmployeesModel.GenerateSched" />
+          <FunctionImportMapping FunctionImportName="OutputEmployee" FunctionName="Хранилище DataBaseEmployeesModel.OutputEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataBaseEmployeesModel.OutputEmployee_Result">
+                <ScalarProperty Name="PersonnelNumber" ColumnName="PersonnelNumber" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="PassportData" ColumnName="PassportData" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="AmountOfChildren" ColumnName="AmountOfChildren" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="OutputEmployeeWithCh" FunctionName="Хранилище DataBaseEmployeesModel.OutputEmployeeWithCh">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataBaseEmployeesModel.OutputEmployeeWithCh_Result">
+                <ScalarProperty Name="PersonnelNumber" ColumnName="PersonnelNumber" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="PassportData" ColumnName="PassportData" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="AmountOfChildren" ColumnName="AmountOfChildren" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Aver" ColumnName="Aver" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ScheduleDelete" FunctionName="Хранилище DataBaseEmployeesModel.ScheduleDelete" />
+          <FunctionImportMapping FunctionImportName="ScheduleInsert" FunctionName="Хранилище DataBaseEmployeesModel.ScheduleInsert" />
+          <FunctionImportMapping FunctionImportName="ScheduleOutputAll" FunctionName="Хранилище DataBaseEmployeesModel.ScheduleOutputAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataBaseEmployeesModel.ScheduleOutputAll_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Employee_PersonnelNumber" ColumnName="Employee_PersonnelNumber" />
+                <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateChildren" FunctionName="Хранилище DataBaseEmployeesModel.UpdateChildren" />
+          <FunctionImportMapping FunctionImportName="UpdateDepartment" FunctionName="Хранилище DataBaseEmployeesModel.UpdateDepartment" />
+          <FunctionImportMapping FunctionImportName="UpdateEmployee" FunctionName="Хранилище DataBaseEmployeesModel.UpdateEmployee" />
+          <FunctionImportMapping FunctionImportName="UpdateSchedule" FunctionName="Хранилище DataBaseEmployeesModel.UpdateSchedule" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

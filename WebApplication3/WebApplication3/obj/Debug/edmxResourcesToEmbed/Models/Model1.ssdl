@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище DataBaseEmployeesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BirthCertificate">
+    <Key>
+      <PropertyRef Name="Employee_PersonnelNumber" />
+      <PropertyRef Name="Children_Name" />
+    </Key>
+    <Property Name="Employee_PersonnelNumber" Type="int" Nullable="false" />
+    <Property Name="Children_Name" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Children">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Sex" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="DateOfBirth" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="NumberOfAssignedRooms" Type="int" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="PersonnelNumber" />
+    </Key>
+    <Property Name="PersonnelNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="PassportData" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateOfBirth" Type="date" Nullable="false" />
+    <Property Name="Sex" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="Position" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="AmountOfChildren" Type="varchar" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="Schedule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Employee_PersonnelNumber" Type="int" Nullable="false" />
+    <Property Name="Department_Name" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="CompletionDate" Type="date" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__BirthCert__Child__68487DD7">
+    <End Role="Children" Type="Self.Children" Multiplicity="1" />
+    <End Role="BirthCertificate" Type="Self.BirthCertificate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Children">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="BirthCertificate">
+        <PropertyRef Name="Children_Name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BirthCert__Emplo__6754599E">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="BirthCertificate" Type="Self.BirthCertificate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="PersonnelNumber" />
+      </Principal>
+      <Dependent Role="BirthCertificate">
+        <PropertyRef Name="Employee_PersonnelNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Schedule__Depart__19DFD96B">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Schedule">
+        <PropertyRef Name="Department_Name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Schedule__Employ__1AD3FDA4">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="PersonnelNumber" />
+      </Principal>
+      <Dependent Role="Schedule">
+        <PropertyRef Name="Employee_PersonnelNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="BirthCertificateDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="BirthCertificateInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="BirthCertificateOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ChildrenDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Sex" Type="varchar" Mode="In" />
+    <Parameter Name="Birth" Type="date" Mode="In" />
+  </Function>
+  <Function Name="ChildrenInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Sex" Type="varchar" Mode="In" />
+    <Parameter Name="Birth" Type="date" Mode="In" />
+  </Function>
+  <Function Name="ChildrenOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="DepartmentDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Count" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DepartmentInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Count" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DepartmentOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="EmployeeDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EmployeeInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FullName" Type="varchar" Mode="In" />
+    <Parameter Name="Pass" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="varchar" Mode="In" />
+    <Parameter Name="Birth" Type="date" Mode="In" />
+    <Parameter Name="Sex" Type="varchar" Mode="In" />
+    <Parameter Name="Position" Type="varchar" Mode="In" />
+    <Parameter Name="Children" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="EmployeeOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GenerateBirthCer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowsToInsert" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GenerateChild" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowsToInsert" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GenerateDep" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowsToInsert" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GenerateEmp1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowsToInsert" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GenerateSched" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowsToInsert" Type="int" Mode="In" />
+  </Function>
+  <Function Name="OutputEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Date" Type="date" Mode="In" />
+  </Function>
+  <Function Name="OutputEmployeeWithCh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ScheduleDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id_sc" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ScheduleInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Start" Type="date" Mode="In" />
+    <Parameter Name="End" Type="date" Mode="In" />
+  </Function>
+  <Function Name="ScheduleOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UpdateChildren" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Sex" Type="varchar" Mode="In" />
+    <Parameter Name="Birth" Type="date" Mode="In" />
+  </Function>
+  <Function Name="UpdateDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Count" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="FullName" Type="varchar" Mode="In" />
+    <Parameter Name="Pass" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="varchar" Mode="In" />
+    <Parameter Name="Birth" Type="date" Mode="In" />
+    <Parameter Name="Sex" Type="varchar" Mode="In" />
+    <Parameter Name="Position" Type="varchar" Mode="In" />
+    <Parameter Name="Children" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id_Sc" Type="int" Mode="In" />
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Start" Type="date" Mode="In" />
+    <Parameter Name="End" Type="date" Mode="In" />
+  </Function>
+  <EntityContainer Name="Хранилище DataBaseEmployeesModelContainer">
+    <EntitySet Name="BirthCertificate" EntityType="Self.BirthCertificate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Children" EntityType="Self.Children" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__BirthCert__Child__68487DD7" Association="Self.FK__BirthCert__Child__68487DD7">
+      <End Role="Children" EntitySet="Children" />
+      <End Role="BirthCertificate" EntitySet="BirthCertificate" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BirthCert__Emplo__6754599E" Association="Self.FK__BirthCert__Emplo__6754599E">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="BirthCertificate" EntitySet="BirthCertificate" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Schedule__Depart__19DFD96B" Association="Self.FK__Schedule__Depart__19DFD96B">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Schedule" EntitySet="Schedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Schedule__Employ__1AD3FDA4" Association="Self.FK__Schedule__Employ__1AD3FDA4">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Schedule" EntitySet="Schedule" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
